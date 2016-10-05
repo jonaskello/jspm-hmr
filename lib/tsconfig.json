@@ -19,7 +19,11 @@
     "allowUnusedLabels": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["node"]
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "*": ["custom_typings/*"]
+    }
   },
   "filesGlob": [
     "**/*.ts",
