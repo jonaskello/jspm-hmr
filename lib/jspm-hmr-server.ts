@@ -48,7 +48,7 @@ export function start(options: Options): any {
   const cache = options.caching || -1;
   const open = options.open || false;
   const command = options.command || null;
-  const fallback = options.fallback || 'index.html';
+  const fallback = options.fallback || null;
   const server = createServer(path, cache, fallback);
 
   logOptionsInfo(packageVersion, nodeEnv, cache);
@@ -59,7 +59,7 @@ export function start(options: Options): any {
   }
   server.listen(port);
 
-  logStartedInfo(path, url);
+  logStartedInfo(path, url, fallback);
 
   // open browser
   if (open) {
@@ -92,7 +92,9 @@ function logOptionsInfo(version, nodeEnv, cache) {
   );
 }
 
-function logStartedInfo(path, url) {
+function logStartedInfo(path: string, url: string, fallback: string): void {
   console.log(`serving "${path}", listening at ${url}`);
+  if (fallback)
+    console.log(`using "${fallback}" as fallback`);
   console.log('\n>>> hit CTRL-C to stop <<<\n');
 }

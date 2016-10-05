@@ -14,14 +14,14 @@ function start(options) {
     const cache = options.caching || -1;
     const open = options.open || false;
     const command = options.command || null;
-    const fallback = options.fallback || 'index.html';
+    const fallback = options.fallback || null;
     const server = create_server_1.createServer(path, cache, fallback);
     logOptionsInfo(packageVersion, nodeEnv, cache);
     if (hotReload) {
         injectChokidarSocketEmitter(server);
     }
     server.listen(port);
-    logStartedInfo(path, url);
+    logStartedInfo(path, url, fallback);
     if (open) {
         opener_1.default(url, {
             command: command
@@ -46,8 +46,10 @@ function logOptionsInfo(version, nodeEnv, cache) {
         '  # cache          | ' + cacheText + '       #' + '\n' +
         '  ###################################' + '\n');
 }
-function logStartedInfo(path, url) {
+function logStartedInfo(path, url, fallback) {
     console.log(`serving "${path}", listening at ${url}`);
+    if (fallback)
+        console.log(`using "${fallback}" as fallback`);
     console.log('\n>>> hit CTRL-C to stop <<<\n');
 }
 //# sourceMappingURL=jspm-hmr-server.js.map
