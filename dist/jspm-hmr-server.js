@@ -31,7 +31,6 @@ function start(options) {
 }
 exports.start = start;
 function injectChokidarSocketEmitter(server) {
-    console.log("server", server);
     chokidar({
         app: server
     });
