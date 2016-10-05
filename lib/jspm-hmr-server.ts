@@ -17,11 +17,11 @@
 // TODO: extract as seperate node package
 import * as httpServer from 'http-server';
 import openerCommand from 'opener';
+import * as chokidar from 'chokidar-socket-emitter';
+import {createServer} from './create-server';
 
-// TODO: Change to ES6 imports
-import chokidar = require('chokidar-socket-emitter');
+// TODO: Change to ES6 import
 const packageVersion = require('../package.json').version;
-
 const nodeEnv = process.env.NODE_ENV;
 
 export interface Options {
@@ -34,9 +34,10 @@ export interface Options {
   cache?: number;
   open?: boolean;
   command?: string;
+  fallback?: string;
 }
 
-export function start(options: Options): void {
+export function start(options: Options): any {
   // init
   const hotReload = true;
   const path = options.path || '.';
@@ -47,7 +48,8 @@ export function start(options: Options): void {
   const cache = options.caching || -1;
   const open = options.open || false;
   const command = options.command || null;
-  const server = createServer(path, cache);
+  const fallback = options.fallback || 'index.html';
+  const server = createServer(path, cache, fallback);
 
   logOptionsInfo(packageVersion, nodeEnv, cache);
 
@@ -69,21 +71,9 @@ export function start(options: Options): void {
   return server;
 }
 
-function createServer(path, cache) {
-  return httpServer.createServer({
-    root: path,
-    cache: cache,
-    robots: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': 'true'
-    }
-  });
-}
-
 function injectChokidarSocketEmitter(server) {
   chokidar({
-    app: server.server
+    app: server
   });
 }
 
