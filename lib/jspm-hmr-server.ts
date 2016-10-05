@@ -13,12 +13,11 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-'use strict';
 // TODO: switch to core http module
 // TODO: extract as seperate node package
-const httpServer = require('http-server');
-const chokidar = require('chokidar-socket-emitter');
-const openerCommand = require('opener');
+import * as httpServer from 'http-server';
+import * as chokidar from 'chokidar-socket-emitter';
+import * as openerCommand from 'opener';
 const packageVersion = require('../package.json').version;
 const nodeEnv = process.env.NODE_ENV;
 

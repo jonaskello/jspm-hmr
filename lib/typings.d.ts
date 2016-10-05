@@ -1,11 +1,14 @@
-/// <reference path="../typings/index"/>
+// declare module 'chokidar-socket-emitter' {
+//   const main: (options: { app: any }) => void;
+//   export default main;
+// }
 
-declare module 'chokidar-socket-emitter' {
-  const main: (options: { app: any }) => void;
-  export default main;
-}
+// tslint:disable-next-line
+declare module 'chokidar-socket-emitter';
 
-declare module 'http-server' {
-  const main: any;
-  export default main;
-}
+// tslint:disable-next-line
+declare module 'http-server';
+
+// tslint:disable-next-line
+declare module 'opener';
+

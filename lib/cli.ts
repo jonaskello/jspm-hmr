@@ -74,14 +74,14 @@ async function initProcedure() {
       const targetPath = path.join(process.cwd(), path.sep, file);
       if (await checkFileExistsConfirmOverwrite(targetPath)) {
         confirmedFiles.push(targetPath);
-      };
+      }
     }
     // ask to init server TODO
     for (let file of serverFiles) {
       const targetPath = path.join(process.cwd(), path.sep, file);
       if (await checkFileExistsConfirmOverwrite(targetPath)) {
         confirmedFiles.push(targetPath);
-      };
+      }
     }
   } catch (err) {
     console.log(err);
@@ -113,7 +113,8 @@ async function checkFileExistsConfirmOverwrite(file) {
 
 function checkFileExists(file: any): Promise<any> {
   return new Promise((resolve, reject) => {
-    fs.access(file, fs.W_OK, (err) => {
+    // TODO: Find out why the typings will not allow W_OK here
+    fs.access(file, (fs as any).W_OK, (err) => {
       if (err) {
         resolve(false);
       }
