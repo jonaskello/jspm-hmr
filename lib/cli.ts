@@ -21,9 +21,12 @@ import * as path from 'path';
 import * as readline from 'readline';
 import * as jspmHmrServer from './jspm-hmr-server';
 
+// TODO: Change to ES6 imports
 const program = require('commander');
-const packageVersion = require('../package.json').version;
-const packageDescription = require('../package.json').description;
+const packageJson = require('../package.json');
+
+const packageVersion = packageJson.version;
+const packageDescription = packageJson.description;
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -39,7 +42,7 @@ program
   .option('-C, --cache [number]', 'enable Cache-Control with max-age=number (defaults to -1)', parseInt)
   .parse(process.argv);
 
-const options = {
+const options: jspmHmrServer.Options = {
   path: program.args[0],
   cache: program.cache,
   port: program.port,

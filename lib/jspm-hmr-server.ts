@@ -16,12 +16,27 @@
 // TODO: switch to core http module
 // TODO: extract as seperate node package
 import * as httpServer from 'http-server';
-import * as chokidar from 'chokidar-socket-emitter';
-import * as openerCommand from 'opener';
+import openerCommand from 'opener';
+
+// TODO: Change to ES6 imports
+import chokidar = require('chokidar-socket-emitter');
 const packageVersion = require('../package.json').version;
+
 const nodeEnv = process.env.NODE_ENV;
 
-export function start(options) {
+export interface Options {
+  hotReload?: boolean;
+  path?: string;
+  protocol?: string;
+  host?: string;
+  port?: number;
+  caching?: number;
+  cache?: number;
+  open?: boolean;
+  command?: string;
+}
+
+export function start(options: Options): void {
   // init
   const hotReload = true;
   const path = options.path || '.';

@@ -28,8 +28,7 @@
   ],
   "files": [
     "cli.ts",
-    "jspm-hmr-server.ts",
-    "typings.d.ts"
+    "jspm-hmr-server.ts"
   ],
   "atom": {
     "rewriteTsconfig": true,

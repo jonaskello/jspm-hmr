@@ -43,3 +43,6 @@ dist
 
 # Webstorm
 .idea/
+
+# Exclude our own node_modules that is used for custom @types
+!lib/node_modules
